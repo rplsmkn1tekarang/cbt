@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CBT - SMK Negeri 1 Tekarang</title>
   <!-- Tag untuk menambahkan Favicon dari link gambar -->
-    <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/ncwrG1vL/2.png">
+  <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/ncwrG1vL/2.png">
   <style>
     html, body {
       margin: 0;
@@ -14,6 +14,7 @@
       height: 100%;
       overflow: hidden;
       background-color: #ffffff;
+      font-family: Arial, sans-serif;
     }
     iframe {
       width: 100%;
@@ -21,17 +22,39 @@
       border: none;
       display: block;
     }
+    #error-message {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #333;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Iframe dengan izin autoplay suara -->
-  <iframe id="webAppFrame" src="" allow="autoplay; encrypted-media"></iframe>
+  <!-- Iframe dengan izin lengkap -->
+  <iframe id="webAppFrame" src="" allow="autoplay; encrypted-media; fullscreen"></iframe>
+  
+  <div id="error-message">
+    <h3>Gagal memuat aplikasi CBT.</h3>
+    <p>Pastikan izin deployment Google Apps Script sudah disetel ke <b>"Anyone"</b>.</p>
+    <a href="#" id="directLink" target="_blank" style="color: #1a73e8;">Buka Langsung di Tab Baru</a>
+  </div>
 
   <script>
     const baseUrl = "https://script.google.com/macros/s/AKfycbwxs_7xXrxC_p5n9X_AxO1wbdQ1Ba9iFHztfhJQVAjAzQZMXaoe9UVTCdvF17f29OAQpA/exec";
     const urlParams = window.location.search;
-    document.getElementById("webAppFrame").src = baseUrl + urlParams;
+    const fullUrl = baseUrl + urlParams;
+
+    // Masukkan URL ke iframe
+    const iframe = document.getElementById("webAppFrame");
+    iframe.src = fullUrl;
+
+    // Fallback jika terjadi kendala koneksi iframe
+    document.getElementById("directLink").href = fullUrl;
   </script>
 
 </body>
