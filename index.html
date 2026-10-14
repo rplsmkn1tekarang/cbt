@@ -2,10 +2,41 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbwxs_7xXrxC_p5n9X_AxO1wbdQ1Ba9iFHztfhJQVAjAzQZMXaoe9UVTCdvF17f29OAQpA/exec">
-  <title>Mengarahkan ke CBT - SMK Negeri 1 Tekarang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CBT - SMK Negeri 1 Tekarang</title>
+  <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/ncwrG1vL/2.png">
+  <style>
+    body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #fff; }
+    #app-container { width: 100%; height: 100%; border: none; }
+  </style>
 </head>
 <body>
-  <p>Sedang mengarahkan ke halaman ujian CBT... Jika tidak otomatis berpindah, <a href="https://script.google.com/macros/s/AKfycbwxs_7xXrxC_p5n9X_AxO1wbdQ1Ba9iFHztfhJQVAjAzQZMXaoe9UVTCdvF17f29OAQpA/exec">klik di sini</a>.</p>
+
+  <div id="loading" style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;color:#555;">
+    Memuat Sistem Ujian, silakan tunggu...
+  </div>
+  
+  <div id="app-container"></div>
+
+  <script>
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbwxs_7xXrxC_p5n9X_AxO1wbdQ1Ba9iFHztfhJQVAjAzQZMXaoe9UVTCdvF17f29OAQpA/exec" + window.location.search;
+
+    // Mengambil halaman Apps Script dan merendernya di dalam GitHub Pages
+    fetch(scriptUrl)
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('loading').style.display = 'none';
+        
+        // Membuat document open untuk menulis ulang DOM
+        document.open();
+        document.write(html);
+        document.close();
+      })
+      .catch(err => {
+        document.getElementById('loading').innerHTML = "Gagal memuat sistem ujian. Periksa koneksi internet Anda.";
+        console.error(err);
+      });
+  </script>
+
 </body>
 </html>
